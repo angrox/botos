@@ -67,6 +67,11 @@ class BotosBot(JabberBot):
 
 class CPU5Bot(BotosBot):
 
+    def unknown_command(self, mess, cmd, args):
+        uc_answer=botos_unknown_command(self, mess, cmd, args)
+        return uc_answer
+
+    
     @botcmd
     def date(self, mess, args):
         reply = datetime.now().strftime('%Y-%m-%d')
@@ -97,6 +102,18 @@ def botos_cmd(args):
 
     return "blu"
 
+
+def botos_unknown_command(self, mess, cmd, args):
+    unparsed_cmd=mess.getBody().split(' ', 1)[0]
+    if re.match("http://www.youtube.com/watch", cmd):
+        lynx_cmd='lynx -dump "%s" | head -5 | tr -d "\n" | cut -d"]" -f4 | cut -d"[" -f1 | tr -s " "' % unparsed_cmd
+        cmdout=subprocess.check_output(lynx_cmd,shell=True).strip()
+        lynx_cmd='lynx -dump "%s" | grep "Show video statistics" | awk "{print \$1}"' % unparsed_cmd
+        cmdout="%s\n%s views" % (cmdout, subprocess.check_output(lynx_cmd,shell=True).strip())
+        lynx_cmd='lynx -dump "%s" | grep "likes" | grep "dislike" | tr -d "*" | tr -s " "' % unparsed_cmd
+        cmdout="%s, %s" % (cmdout, subprocess.check_output(lynx_cmd,shell=True).strip())
+        return cmdout
+    return ""
 
 
 if __name__ == '__main__':
