@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# Copyright (C) 2010 Arthur Furlan <afurlan@afurlan.org>
+#
+# Botos - a python jabber bot
+#
+# Based on the example jabber bot from Arthur Furlan <afurlan@afurlan.org>
+# which ships with the python-jabberbot package
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-# 
-# On Debian systems, you can find the full text of the license in
-# /usr/share/common-licenses/GPL-3
+
 
 
 from jabberbot import JabberBot, botcmd
